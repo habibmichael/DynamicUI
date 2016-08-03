@@ -1,0 +1,25 @@
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <fragment
+        android:name="com.l2l.androided.mh122354.dynamicuich1.BookListFragment"
+        android:id="@+id/fragmentTitles"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"/>
+
+
+    <fragment
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/fragmentDesc"
+        android:layout_weight="1"
+        android:name="com.l2l.androided.mh122354.dynamicuich1.BookDescFragment"/>
+
+
+
+
+</LinearLayout>
