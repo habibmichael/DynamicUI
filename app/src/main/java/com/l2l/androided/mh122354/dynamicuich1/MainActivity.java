@@ -1,12 +1,13 @@
 package com.l2l.androided.mh122354.dynamicuich1;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements  View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements  View.OnClickListener, onSelectedBookChangedListener{
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -65,5 +66,18 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
             }
 
         }
+
+    @Override
+    public void onSelectedBookChanged(int bookIndex) {
+        //Access fragment manager
+      android.app.FragmentManager fragmentManager = getFragmentManager();
+
+        BookDescFragment bookDescFragment = (BookDescFragment)
+                fragmentManager.findFragmentById(R.id.fragmentDesc);
+
+        //Display book title
+        if(bookDescFragment!=null)
+            bookDescFragment.setBook(bookIndex);
     }
+}
 
