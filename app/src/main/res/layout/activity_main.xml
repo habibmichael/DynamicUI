@@ -2,24 +2,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layoutRoot"
     xmlns:android="http://schemas.android.com/apk/res/android">
-   
-    <fragment
-      android:name="com.l2l.androided.mh122354.dynamicuich1.BookListFragment"
-      android:id="@+id/fragmentTitles"
-      android:layout_weight="1"
-        android:layout_height="0dp"
-        android:layout_width="match_parent"/>
 
-
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/fragmentDesc"
-        android:layout_weight="1"
-        android:name="com.l2l.androided.mh122354.dynamicuich1.BookDescFragment"/>
-    
-    
-    
-  
 </LinearLayout>

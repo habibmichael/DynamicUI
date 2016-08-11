@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <fragment
-        android:name="com.l2l.androided.mh122354.dynamicuich1.BookListFragment"
+        android:name="com.l2l.androided.mh122354.dynamicuich1.BookListFragment2"
         android:id="@+id/fragmentTitles"
         android:layout_weight="1"
         android:layout_height="match_parent"
