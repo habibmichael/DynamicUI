@@ -32,6 +32,19 @@ public class MainActivity extends AppCompatActivity implements onSelectedBookCha
             //If not found we're doing dynamic management
             isDynamic = bookDescFragment == null || !bookDescFragment.isInLayout();
 
+            //Load List if needed
+            if(isDynamic){
+
+                //Begin Transaction
+                FragmentTransaction ft = fm.beginTransaction();
+
+                //Create Fragment & Add
+                BookListFragment2 listFragment = new BookListFragment2();
+                ft.add(R.id.layoutRoot,listFragment,"bookList");
+
+                ft.commit();
+            }
+
         }
 
 
@@ -46,14 +59,28 @@ public class MainActivity extends AppCompatActivity implements onSelectedBookCha
     @Override
     public void onSelectedBookChanged(int bookIndex) {
         //Access fragment manager
-      android.app.FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fm = getFragmentManager();
 
-        BookDescFragment bookDescFragment = (BookDescFragment)
-                fragmentManager.findFragmentById(R.id.fragmentDesc);
+        BookDescFragment bookDesc;
 
-        //Display book title
-        if(bookDescFragment!=null)
-            bookDescFragment.setBook(bookIndex);
+        if(isDynamic){
+
+            //Replace list with desc fragment
+            FragmentTransaction ft = fm.beginTransaction();
+            bookDesc = BookDescFragment.newInstance(bookIndex);
+            ft.replace(R.id.layoutRoot,bookDesc,"bookDescription");
+            ft.addToBackStack(null);
+            ft.setCustomAnimations(android.R.animator.fade_in,
+                    android.R.animator.fade_out);
+            ft.commit();
+        }
+        else{
+
+            bookDesc = (BookDescFragment)fm.findFragmentById(R.id.fragmentDesc);
+            bookDesc.setBook(bookIndex);
+        }
     }
+
+
 }
 
