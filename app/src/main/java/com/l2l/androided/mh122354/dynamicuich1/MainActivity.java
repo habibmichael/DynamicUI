@@ -2,9 +2,9 @@ package com.l2l.androided.mh122354.dynamicuich1;
 
 
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements onSelectedBookCha
             setContentView(R.layout.activity_main);
 
             //Get book Description Fragment
-            FragmentManager fm = getFragmentManager();
+            FragmentManager fm = getSupportFragmentManager();
             Fragment bookDescFragment =
                     fm.findFragmentById(R.id.fragmentDesc);
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements onSelectedBookCha
     @Override
     public void onSelectedBookChanged(int bookIndex) {
         //Access fragment manager
-        FragmentManager fm = getFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
 
         BookDescFragment bookDesc;
 
@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity implements onSelectedBookCha
             bookDesc = BookDescFragment.newInstance(bookIndex);
             ft.replace(R.id.layoutRoot,bookDesc,"bookDescription");
             ft.addToBackStack(null);
-            ft.setCustomAnimations(android.R.animator.fade_in,
-                    android.R.animator.fade_out);
+            ft.setCustomAnimations(android.R.anim.fade_in,
+                    android.R.anim.fade_out);
             ft.commit();
         }
         else{

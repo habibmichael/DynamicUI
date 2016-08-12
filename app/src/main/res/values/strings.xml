@@ -36,4 +36,6 @@
     external databases and ways you can utilize them from within an Android application.
   </string>
     <string name="activityMainLabel">Android Books</string>
+    <string name="title_activity_book_fragment">BookFragment</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
