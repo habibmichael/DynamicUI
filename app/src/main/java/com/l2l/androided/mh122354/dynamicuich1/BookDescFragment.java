@@ -1,8 +1,8 @@
 package com.l2l.androided.mh122354.dynamicuich1;
 
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +19,25 @@ public class BookDescFragment extends Fragment {
     TextView mBookDescriptionTextView;
 
     public static final String BOOK_INDEX = "book index";
+    private static final String ARG_TITLE = "title";
+    private static final String ARG_DESCRIPTION = "description";
+    private static final String ARG_IMAGE_ID = "image id";
+    private static final String ARG_POSITION = "position";
 
     private static final int BOOK_INDEX_NOT_SET = -1;
+
+    private onSelectedBookChangedListener mListener;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         View viewHierarchy = inflater.inflate(R.layout.fragment_book_desc,container,false);
+
+        viewHierarchy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onSelectedBookChanged(view,0);
+            }
+        });
 
         //Load array of book descriptions
         mBookDescriptions = getResources().getStringArray(R.array.bookDescriptions);
@@ -56,14 +69,19 @@ public class BookDescFragment extends Fragment {
     }
 
     //Simplifies process of creating an istance and passing in the index value
-    public static BookDescFragment newInstance(int bookIndex){
 
+    public static BookDescFragment newInstance(String title, String description,
+                                               int imageResourceId, int position) {
         BookDescFragment fragment = new BookDescFragment();
         Bundle args = new Bundle();
-        args.putInt(BOOK_INDEX,bookIndex);
+        args.putString(ARG_TITLE, title);
+        args.putString(ARG_DESCRIPTION, description);
+        args.putInt(ARG_IMAGE_ID, imageResourceId);
+        args.putInt(ARG_POSITION, position);
         fragment.setArguments(args);
         return fragment;
     }
+
 
 
 }

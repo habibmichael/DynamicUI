@@ -4,14 +4,44 @@
     android:id="@+id/scrollDescription">
 
 
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="20dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/topImage"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:src="@drawable/db_programming_top_card"
+            android:elevation="16dp"
+            android:transitionName="book_image"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Improving User Interface Design with Android Fragments"
+            android:id="@+id/bookTitle"
+            android:layout_toEndOf="@+id/topImage"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:transitionName="title_text"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/dynamicUiDescription"
         android:id="@+id/bookDescription"
+        android:transitionName="title_text"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:gravity="fill_horizontal"/>
+    </RelativeLayout>
 
 </ScrollView>

@@ -1,8 +1,12 @@
 package com.l2l.androided.mh122354.dynamicuich1;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
@@ -10,65 +14,55 @@ import android.widget.RadioGroup;
 /**
  * Created by mh122354 on 8/2/2016.
  */
-public class BookListFragment extends Fragment
-    implements RadioGroup.OnCheckedChangeListener{
+public class BookListFragment extends Fragment {
 
+    private onSelectedBookChangedListener mListener;
+    private String[] mTitles;
+    private int[] mImageResourceIds;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
+    public void onCreate(Bundle savedInstanceState){
+
+        mAdapter = new BookAdapter(mTitles,mImageResourceIds);
+    }
+
     public View onCreateView(LayoutInflater inflater , ViewGroup container, Bundle savedInstanceState){
 
-        View viewHierarchy = inflater.inflate(R.layout.fragment_book_list,container,false);
+        View viewHierarchy = inflater.inflate(R.layout.book_card_view,container,false);
+        mRecyclerView = (RecyclerView)viewHierarchy.findViewById(R.id.book_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getActivity(),
+                        new RecyclerItemClickListener.OnItemClickListener(){
+                            @Override
+                            public void onItemClick(View v , int position){
+                                mListener.onSelectedBookChanged(v, position);
+                            }
+                        })
+        );
 
-        //Set listener to BookListFragment  class
-        RadioGroup group = (RadioGroup)viewHierarchy.findViewById(R.id.bookSelectGroup);
-        group.setOnCheckedChangeListener(this);
+
+
 
         return viewHierarchy;
 
 
     }
 
-    //Translates book ids to indexes
-    public int translateToIndex(int id){
-
-        int index=-1;
-
-        switch(id){
-            case R.id.dynamicUiBook:
-                index=0;
-                break;
-            case R.id.android4NewBook:
-                index=1;
-                break;
-            case R.id.androidSysDevBook:
-                index=2;
-                break;
-            case R.id.androidEngineBook:
-                index=3;
-                break;
-            case R.id.androidDbProgBook:
-                index=4;
-                break;
-
-        }
-
-        return index;
-
-
-
-
-    }
-
     @Override
-    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+    public void onAttach(Context context){
 
-        int bookIndex = translateToIndex(i);
-
-        //Get parent activity & send notification
-        onSelectedBookChangedListener listener =
-                (onSelectedBookChangedListener)getActivity();
-
-        listener.onSelectedBookChanged(bookIndex);
-
+        super.onAttach(context);
+        mListener = (onSelectedBookChangedListener)context;
     }
+
+
+
+
 }
